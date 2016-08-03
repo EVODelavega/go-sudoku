@@ -132,7 +132,7 @@ func (g *Grid) Initialize() {
 func (f *Field) GetPrintValue() interface{} {
 	var r interface{}
 	if f.Value == 0 {
-		r = ' '
+		r = " "
 	} else {
 		r = f.Value
 	}
