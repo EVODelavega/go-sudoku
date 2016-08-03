@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"time"
 )
 
 /**
@@ -131,7 +132,7 @@ func (g *Grid) Initialize() {
 func (f *Field) GetPrintValue() interface{} {
 	var r interface{}
 	if f.Value == 0 {
-		r = " "
+		r = ' '
 	} else {
 		r = f.Value
 	}
@@ -371,8 +372,10 @@ func (f *Field) getPossibleValues() []int {
 }
 
 func main() {
+	total := time.Now()
 	pathPtr := flag.String("path", "", "Path to in-file (containing sudoku puzzle)")
 	strPtr := flag.String("raw", "", "String representation of sudoku to solve")
+	timePtr := flag.Bool("time", false, "Time how long certain steps take")
 
 	var f []byte
 	flag.Parse()
@@ -392,12 +395,25 @@ func main() {
 		f = []byte(*strPtr)
 	}
 
+	step := time.Now()
 	g := &Grid{}
 	g.Initialize()
+	if *timePtr {
+		fmt.Printf("Time taken initializing grid: %s\n", time.Since(step))
+		step = time.Now()
+	}
 
 	if err := g.SetValues(f); err != nil {
 		panic(err.Error()) // input error
 	} else {
+		if *timePtr {
+			fmt.Printf("Time loading puzzle: %s (total %s)\n",
+				time.Since(step),
+				time.Since(total),
+			)
+			step = time.Now()
+		}
+		fmt.Println("Given puzzle:")
 		fmt.Println(g.String())
 		tries := 10000
 		for tries > 0 {
@@ -408,6 +424,13 @@ func main() {
 				break
 			}
 		}
+		fmt.Println("Solution:")
 		fmt.Println(g.String())
+		if *timePtr {
+			fmt.Printf("Solution found in %s - total running time %s\n",
+				time.Since(step),
+				time.Since(total),
+			)
+		}
 	}
 }

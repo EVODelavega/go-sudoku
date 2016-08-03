@@ -38,5 +38,12 @@ Should output
 +|===|===|===||===|===|===||===|===|===|+
 ```
 
-Passing the contents of example.input using the -raw flag has the same effect.
+The example.input file uses `0` values to mark empty fields. Spaces can be used to the same effect: any character other than 1-9 will be interpreted as an empty field.
+
+### Other options
+
+* `-path`: tell the solver where to find a puzzle input file
+* `-raw`: Instead of an input file, this option allows you to pass the puzzle as an argument. The format is the same as the one used in the input file.
+* `-time`: Work in progress - this is probably going to change to a `-debug` flag, for now it just tells you how long it took to initialize, load, and solve the puzzle
+* `-h`: Get some help
 
