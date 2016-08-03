@@ -138,21 +138,25 @@ func (f *Field) GetPrintValue() interface{} {
 	return r
 }
 
-func (r *Row) GetValues() [9]int {
-	ret := [9]int{}
-	for i, f := range r.Fields {
-		ret[i] = f.Value
+func (r *Row) GetPrintableValues() []interface{} {
+	vals := make([]interface{}, len(r.Fields))
+	for k, f := range r.Fields {
+		if f.Value == 0 {
+			vals[k] = " "
+		} else {
+			vals[k] = f.Value
+		}
 	}
-	return ret
+	return vals
 }
 
 func (g *Grid) String() string {
 	buffer := []byte("+|===|===|===||===|===|===||===|===|===|+\n")
 	for i, hr := range g.HRows {
-		v := hr.GetValues()
+		v := hr.GetPrintableValues()
 		buffer = append(buffer, fmt.Sprintf(
 			"|| %v | %v | %v || %v | %v | %v || %v | %v | %v ||\n",
-			v[0], v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8], //find a way to get a []interface{} type returned, and use v... to print
+			v...,
 		)...)
 		if m := i % 3; i != 8 && m == 2 {
 			buffer = append(buffer,
