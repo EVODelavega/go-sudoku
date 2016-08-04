@@ -50,3 +50,8 @@ The example.input file uses `0` values to mark empty fields. Spaces can be used 
 #### Runall script
 
 Just run `./runall.sh -h` to see what the options are, to run all example input files, and keep the compiled binary, run the script with bot `b` and `k` flags.
+
+#### Example puzzles
+
+The hard and medium example puzzles were taken from http://websudoku.com/ 
+The easy puzzle was taken from a July issue of the London Metro free newspaper. (12/07/2016?)
