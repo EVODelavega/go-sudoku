@@ -47,3 +47,6 @@ The example.input file uses `0` values to mark empty fields. Spaces can be used 
 * `-time`: Work in progress - this is probably going to change to a `-debug` flag, for now it just tells you how long it took to initialize, load, and solve the puzzle
 * `-h`: Get some help
 
+#### Runall script
+
+Just run `./runall.sh -h` to see what the options are, to run all example input files, and keep the compiled binary, run the script with bot `b` and `k` flags.
